@@ -47,9 +47,20 @@ git clone https://github.com/opea-project/GenAIExamples.git
 export ip_address="External_Public_IP"
 export no_proxy=${your_no_proxy},${ip_address}
 export HF_CACHE_DIR=/path/to/your/model/cache/
-export HF_TOKEN=<you-hf-token>
+export HF_TOKEN=<your-hf-token>
 export FINNHUB_API_KEY=<your-finnhub-api-key> # go to https://finnhub.io/ to get your free api key
 export FINANCIAL_DATASETS_API_KEY=<your-api-key> # go to https://docs.financialdatasets.ai/ to get your free api key
+```
+
+#### For running OpenAI models (Xeon only)
+To use OpenAI models, generate a key following these [instructions](https://platform.openai.com/api-keys).
+
+To run models on a remote server, contact the cloud service provider or owner of the on-prem machine for a key to access the desired model on the server.
+
+Then set the environment variable `OPENAI_API_KEY` with the key contents:
+
+```bash
+export OPENAI_API_KEY=<your-openai-key>
 ```
 
 ### 2.3 [Optional] Build docker images
@@ -64,7 +75,7 @@ git clone https://github.com/opea-project/GenAIComps.git
 docker compose -f build.yaml build --no-cache
 ```
 
-If deploy on Gaudi, also need to build vllm image.
+If deploying on Gaudi, build the vllm image.
 
 ```bash
 cd $WORKDIR
@@ -79,7 +90,7 @@ docker build --no-cache -f Dockerfile.hpu -t opea/vllm-gaudi:latest --shm-size=1
 
 ## 3. Deploy with docker compose
 
-### 3.1 Launch vllm endpoint
+### 3.1 (Gaudi only) Launch vllm endpoint
 
 Below is the command to launch a vllm endpoint on Gaudi that serves `meta-llama/Llama-3.3-70B-Instruct` model on 4 Gaudi cards.
 
@@ -95,11 +106,12 @@ The commands below will upload some example files into the knowledge base. You c
 First, launch the redis databases and the dataprep microservice.
 
 ```bash
-# inside $WORKDIR/GenAIExamples/FinanceAgent/docker_compose/intel/hpu/gaudi/
+# For Gaudi, navigate to $WORKDIR/GenAIExamples/FinanceAgent/docker_compose/intel/hpu/gaudi
+# For Xeon, navigate to $WORKDIR/GenAIExamples/FinanceAgent/docker_compose/intel/cpu/xeon
 bash launch_dataprep.sh
 ```
 
-Validate datat ingest data and retrieval from database:
+Validate data ingestion to and retrieval from database:
 
 ```bash
 python $WORKDIR/GenAIExamples/FinanceAgent/tests/test_redis_finance.py --port 6007 --test_option ingest
@@ -108,10 +120,20 @@ python $WORKDIR/GenAIExamples/FinanceAgent/tests/test_redis_finance.py --port 60
 
 ### 3.3 Launch the multi-agent system
 
-The command below will launch 3 agent microservices, 1 docsum microservice, 1 UI microservice.
+`launch_agents.sh` will launch 3 agent microservices, 1 docsum microservice, 1 UI microservice. For Gaudi, the text generation model will be served using vLLM. For Xeon, the text generation model will be using OpenAI.
 
+>**Note**: For running models on a remote server with Xeon, `launch_agents.sh` needs the following modifications before running it:
+- Change `LLM_MODEL_ID` to the name of the model card for the desired model.
+- Change `LLM_ENDPOINT_URL` to the https endpoint of the remote server. The port is not needed.
+- Change the `docker compose` command to the following: 
 ```bash
-# inside $WORKDIR/GenAIExamples/FinanceAgent/docker_compose/intel/hpu/gaudi/
+docker compose -f compose_openai.yaml -f compose_remote.yaml up -d
+```
+
+Run the command to launch the multi-agent system:
+```bash
+# For Gaudi, navigate to $WORKDIR/GenAIExamples/FinanceAgent/docker_compose/intel/hpu/gaudi
+# For Xeon, navigate to $WORKDIR/GenAIExamples/FinanceAgent/docker_compose/intel/cpu/xeon
 bash launch_agents.sh
 ```
 
