@@ -12,7 +12,7 @@ export recursion_limit_worker=12
 export recursion_limit_supervisor=10
 
 llm_port=8086
-export LLM_MODEL_ID="meta-llama/Llama-3.3-70B-Instruct"
+export LLM_MODEL_ID="gpt-4o-mini-2024-07-18"
 export LLM_ENDPOINT_URL="http://${ip_address}:${llm_port}"
 export TEMPERATURE=0.5
 export MAX_TOKENS=4096
@@ -33,4 +33,4 @@ export DOCSUM_ENDPOINT="http://${ip_address}:9000/v1/docsum"
 export FINNHUB_API_KEY=${FINNHUB_API_KEY}
 export FINANCIAL_DATASETS_API_KEY=${FINANCIAL_DATASETS_API_KEY}
 
-docker compose -f compose.yaml up -d
+docker compose -f compose_openai.yaml up -d
