@@ -1,0 +1,7 @@
+# Copyright (C) 2025 Intel Corporation
+# SPDX-License-Identifier: Apache-2.0
+
+services:
+  workflowexec-agent:
+    environment:
+      api_key: ${OPENAI_API_KEY}

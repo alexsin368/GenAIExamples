@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: Apache-2.0
 
 services:
-  worflowexec-agent:
+  workflowexec-agent:
     image: ${REGISTRY:-opea}/agent:${TAG:-latest}
     container_name: workflowexec-agent-endpoint
     volumes:

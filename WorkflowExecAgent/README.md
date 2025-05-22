@@ -99,11 +99,26 @@ export http_proxy=${http_proxy}
 export https_proxy=${https_proxy}
 ```
 
-Launch service by running the docker compose command.
+#### Running models locally
+
+Launch service by running the `docker compose` command.
 
 ```sh
 cd $WORKDIR/GenAIExamples/WorkflowExecAgent/docker_compose
 docker compose -f compose.yaml up -d
+```
+
+#### Running models deployed on a remote server
+To run models deployed on a remote server, ensure the `llm_endpoint_url` and `model` are set properly, then set another environment varable `OPENAI_API_KEY` to access the model using the remote endpoint:
+```sh
+export OPENAI_API_KEY=<you-openai-api-key>
+```
+
+Launch the service by running the `docker compose` command along with the `compose_remote.yaml` file.
+
+```sh
+cd $WORKDIR/GenAIExamples/WorkflowExecAgent/docker_compose
+docker compose -f compose.yaml -f compose_remote.yaml up -d
 ```
 
 ### Validate service
