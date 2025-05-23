@@ -37,7 +37,6 @@ services:
     container_name: dataprep-multimodal-redis
     depends_on:
       - redis-vector-db
-      - lvm-llava
     ports:
       - "${DATAPREP_MMR_PORT}:5000"
     environment:
@@ -48,7 +47,7 @@ services:
       REDIS_HOST: ${REDIS_HOST}
       DATAPREP_MMR_PORT: ${DATAPREP_MMR_PORT}
       INDEX_NAME: ${INDEX_NAME}
-      LVM_ENDPOINT: "http://${LVM_SERVICE_HOST_IP}:${LVM_PORT}/v1/lvm"
+      LVM_ENDPOINT: ${REMOTE_ENDPOINT}
       HUGGINGFACEHUB_API_TOKEN: ${HUGGINGFACEHUB_API_TOKEN}
       MULTIMODAL_DATAPREP: true
       DATAPREP_COMPONENT_NAME: "OPEA_DATAPREP_MULTIMODALREDIS"
@@ -127,8 +126,6 @@ services:
         condition: service_started
       retriever-redis:
         condition: service_started
-      lvm:
-        condition: service_started
     ports:
       - "${MEGA_SERVICE_PORT}:${MEGA_SERVICE_PORT}"
     environment:
@@ -140,7 +137,7 @@ services:
       MM_EMBEDDING_SERVICE_HOST_IP: ${MM_EMBEDDING_SERVICE_HOST_IP}
       MM_EMBEDDING_PORT_MICROSERVICE: ${MM_EMBEDDING_PORT_MICROSERVICE}
       MM_RETRIEVER_SERVICE_HOST_IP: ${MM_RETRIEVER_SERVICE_HOST_IP}
-      LVM_SERVICE_HOST_IP: ${LVM_SERVICE_HOST_IP}
+      LVM_SERVICE_HOST_IP: ${REMOTE_ENDPOINT}
       LVM_MODEL_ID: ${LVM_MODEL_ID}
       OPENAI_API_KEY: ${OPENAI_API_KEY}
       WHISPER_PORT: ${WHISPER_PORT}
