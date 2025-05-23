@@ -2,27 +2,9 @@
 # SPDX-License-Identifier: Apache-2.0
 
 services:
-  lvm:
-    image: ${REGISTRY:-opea}/lvm:${TAG:-latest}
-    container_name: lvm-xeon-server
-    ports:
-      - "9399:9399"
-    ipc: host
-    environment:
-      no_proxy: ${no_proxy}
-      http_proxy: ${http_proxy}
-      https_proxy: ${https_proxy}
-      LVM_ENDPOINT: ${REMOTE_ENDPOINT}
-      LVM_COMPONENT_NAME: "OPEA_REMOTE_LVM"
-      LLM_MODEL_ID: ${LVM_MODEL_ID}
-      HF_HUB_DISABLE_PROGRESS_BARS: 1
-      HF_HUB_ENABLE_HF_TRANSFER: 0
-    restart: unless-stopped
   visualqna-xeon-backend-server:
     image: ${REGISTRY:-opea}/visualqna:${TAG:-latest}
     container_name: visualqna-xeon-backend-server
-    depends_on:
-      - lvm
     ports:
       - "8888:8888"
     environment:
