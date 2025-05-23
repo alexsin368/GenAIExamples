@@ -231,7 +231,7 @@ export REMOTE_ENDPOINT=<https-endpoint-of-remote-server>
 export OPENAI_API_KEY=<your-openai-api-key>
 ```
 
-Find the corresponding [compose_remote.yaml](./docker_compose/intel/cpu/xeon/compose_remote.yaml).
+Find the corresponding [compose_remote.yaml](./docker_compose/intel/cpu/xeon/compose_remote.yaml) and run `docker compose` with it.
 
 ```bash
 # While still in the docker_compose/intel/cpu/xeon directory, use docker compose to bring up the services with a remote endpoint

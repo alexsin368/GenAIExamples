@@ -228,14 +228,18 @@ By default, the multimodal-embedding and LVM models are set to a default value a
 
 ### Start all the services Docker Containers
 
-> Before running the docker compose command, you need to be in the folder that has the docker compose yaml file
+#### Default startup
+
+Before running the `docker compose` command, you need to be in the folder that has the `docker compose` YAML file
 
 ```bash
 cd GenAIExamples/MultimodalQnA/docker_compose/intel/cpu/xeon/
 docker compose -f compose.yaml up -d
 ```
 
-> Alternatively, you can run docker compose with `compose_milvus.yaml` to use the Milvus vector database:
+#### Startup with Milvus vector database
+
+Alternatively, you can run docker compose with `compose_milvus.yaml` to use the Milvus vector database:
 
 ```bash
 export MILVUS_HOST=${host_ip}
@@ -244,6 +248,23 @@ export MILVUS_RETRIEVER_PORT=7000
 export COLLECTION_NAME=LangChainCollection
 cd GenAIExamples/MultimodalQnA/docker_compose/intel/cpu/xeon/
 docker compose -f compose_milvus.yaml up -d
+```
+
+#### Startup with LVM models deployed on a remote server
+
+To run the LVM model on a remote server, the environment variable `LVM_MODEL_ID` may need to be overwritten, and two new environment variables `REMOTE_ENDPOINT` and `OPENAI_API_KEY` need to be set. An example endpoint is https://api.inference.example.com, but the actual value will depend on how it it set up on the remote server. The key is used to access the remote server. 
+
+```bash
+export LVM_MODEL_ID=<name-of-lvm-model-card>
+export REMOTE_ENDPOINT=<https-endpoint-of-remote-server>
+export OPENAI_API_KEY=<your-openai-api-key>
+```
+
+Find the corresponding [compose_remote.yaml](./docker_compose/intel/cpu/xeon/compose_remote.yaml) and run `docker compose` with it.
+
+```bash
+# While still in the docker_compose/intel/cpu/xeon directory, use docker compose to bring up the services with a remote endpoint
+docker compose -f compose_remote.yaml up -d
 ```
 
 ### Validate Microservices
