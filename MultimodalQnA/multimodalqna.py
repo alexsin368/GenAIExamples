@@ -31,6 +31,7 @@ WHISPER_PORT = int(os.getenv("WHISPER_PORT", 7066))
 WHISPER_SERVER_ENDPOINT = os.getenv("WHISPER_SERVER_ENDPOINT", f"http://0.0.0.0:{WHISPER_PORT}/v1/asr")
 TTS_PORT = int(os.getenv("TTS_PORT", 7055))
 TTS_ENDPOINT = os.getenv("TTS_ENDPOINT", f"http://0.0.0.0:{TTS_PORT}/v1/tts")
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY", None)
 
 
 def align_inputs(self, inputs, cur_node, runtime_graph, llm_parameters_dict, **kwargs):
@@ -83,6 +84,7 @@ class MultimodalQnAService:
             name="lvm",
             host=LVM_SERVICE_HOST_IP,
             port=LVM_SERVICE_PORT,
+            api_key=OPENAI_API_KEY,
             endpoint="/v1/lvm",
             use_remote_service=True,
             service_type=ServiceType.LVM,

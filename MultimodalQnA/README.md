@@ -130,7 +130,7 @@ By default, the embedding and LVM models are set to a default value as listed be
 | SpeechT5  | Gaudi | microsoft/speecht5_tts                    |
 | Whisper   | Gaudi | openai/whisper-small                      |
 
-You can choose other LVM models, such as `llava-hf/llava-1.5-7b-hf ` and `llava-hf/llava-1.5-13b-hf`, as needed.
+You can choose other LVM models, such as `llava-hf/llava-1.5-7b-hf ` and `llava-hf/llava-1.5-13b-hf`, as needed. When running on Xeon, the LVM model can be hosted on a remote server and accessed using an endpoint.
 
 ## Deploy MultimodalQnA Service
 
@@ -212,12 +212,35 @@ docker compose -f compose.yaml up -d
 Refer to the [Xeon Guide](./docker_compose/intel/cpu/xeon/README.md) if you would like to build docker images from
 source, otherwise images will be pulled from Docker Hub.
 
+#### Running the LVM model locally
+
 Find the corresponding [compose.yaml](./docker_compose/intel/cpu/xeon/compose.yaml).
 
 ```bash
 # While still in the docker_compose/intel/cpu/xeon directory, use docker compose to bring up the services
 docker compose -f compose.yaml up -d
 ```
+
+#### Running the LVM model on a remote server
+
+To run the LVM model on a remote server, the environment variable `LVM_MODEL_ID` may need to be overwritten, and two new environment variables `REMOTE_ENDPOINT` and `OPENAI_API_KEY` need to be set. An example endpoint is https://api.inference.example.com, but the actual value will depend on how it it set up on the remote server. The key is used to access the remote server. 
+
+```bash
+export LVM_MODEL_ID=<name-of-lvm-model-card>
+export REMOTE_ENDPOINT=<https-endpoint-of-remote-server>
+export OPENAI_API_KEY=<your-openai-api-key>
+```
+
+Find the corresponding [compose_remote.yaml](./docker_compose/intel/cpu/xeon/compose_remote.yaml).
+
+```bash
+# While still in the docker_compose/intel/cpu/xeon directory, use docker compose to bring up the services with a remote endpoint
+docker compose -f compose_remote.yaml up -d
+```
+
+## Launch UI
+
+Access the UI by opening a web browser to http://${host_ip}:${UI_PORT}. Upload a video, image, audio file, or PDF file, then ask questions about the content.
 
 ## MultimodalQnA Demo on Gaudi2
 
