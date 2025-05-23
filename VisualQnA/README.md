@@ -132,6 +132,8 @@ docker compose up -d
 
 ### Deploy VisualQnA on Xeon
 
+#### Deploy with LVM model locally
+
 Refer to the [Xeon Guide](./docker_compose/intel/cpu/xeon/README.md) for more instructions on building docker images from source.
 
 Find the corresponding [compose.yaml](./docker_compose/intel/cpu/xeon/compose.yaml).
@@ -139,6 +141,23 @@ Find the corresponding [compose.yaml](./docker_compose/intel/cpu/xeon/compose.ya
 ```bash
 cd GenAIExamples/VisualQnA/docker_compose/intel/cpu/xeon/
 docker compose up -d
+```
+
+#### Deploy with LVM model on a remote server
+
+To run the LVM model on a remote server, the environment variable `LVM_MODEL_ID` may need to be overwritten, and two new environment variables `REMOTE_ENDPOINT` and `OPENAI_API_KEY` need to be set. An example endpoint is https://api.inference.example.com, but the actual value will depend on how it it set up on the remote server. The key is used to access the remote server. 
+
+```bash
+export LVM_MODEL_ID=<name-of-lvm-model-card>
+export REMOTE_ENDPOINT=<https-endpoint-of-remote-server>
+export OPENAI_API_KEY=<your-openai-api-key>
+```
+
+Find the corresponding [compose_remote.yaml](./docker_compose/intel/cpu/xeon/compose_remote.yaml) and run `docker compose` with it.
+
+```bash
+# While still in the docker_compose/intel/cpu/xeon directory, use docker compose to bring up the services with a remote endpoint
+docker compose -f compose_remote.yaml up -d
 ```
 
 ### Deploy VisualQnA on Kubernetes using Helm Chart

@@ -74,7 +74,9 @@ Note: Please replace with `host_ip` with you external IP address, do not use loc
 
 ### Start all the services Docker Containers
 
-> Before running the docker compose command, you need to be in the folder that has the docker compose yaml file
+#### Deploy with LVM model locally
+
+Before running the docker compose command, you need to be in the folder that has the docker compose yaml file
 
 ```bash
 cd GenAIExamples/VisualQnA/docker_compose/intel/cpu/xeon
@@ -84,6 +86,23 @@ cd GenAIExamples/VisualQnA/docker_compose/intel/cpu/xeon
 docker compose -f compose.yaml up -d
 # if use TGI as the LLM serving backend
 docker compose -f compose_tgi.yaml up -d
+```
+
+#### Deploy with LVM model on a remote server
+
+To run the LVM model on a remote server, the environment variable `LVM_MODEL_ID` may need to be overwritten, and two new environment variables `REMOTE_ENDPOINT` and `OPENAI_API_KEY` need to be set. An example endpoint is https://api.inference.example.com, but the actual value will depend on how it it set up on the remote server. The key is used to access the remote server. 
+
+```bash
+export LVM_MODEL_ID=<name-of-lvm-model-card>
+export REMOTE_ENDPOINT=<https-endpoint-of-remote-server>
+export OPENAI_API_KEY=<your-openai-api-key>
+```
+
+Find the corresponding [compose_remote.yaml](./docker_compose/intel/cpu/xeon/compose_remote.yaml) and run `docker compose` with it.
+
+```bash
+# While still in the docker_compose/intel/cpu/xeon directory, use docker compose to bring up the services with a remote endpoint
+docker compose -f compose_remote.yaml up -d
 ```
 
 ### Validate Microservices
@@ -128,7 +147,7 @@ curl http://${host_ip}:8888/v1/visualqna -H "Content-Type: application/json" -d 
 To access the frontend, open the following URL in your browser: http://{host_ip}:5173. By default, the UI runs on port 5173 internally. If you prefer to use a different host port to access the frontend, you can modify the port mapping in the `compose.yaml` file as shown below:
 
 ```yaml
-  visualqna-gaudi-ui-server:
+  visualqna-xeon-ui-server:
     image: opea/visualqna-ui:latest
     ...
     ports:
