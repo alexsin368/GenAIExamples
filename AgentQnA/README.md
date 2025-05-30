@@ -127,11 +127,12 @@ export HUGGINGFACEHUB_API_TOKEN=<your-HF-token>
 export HF_CACHE_DIR=<directory-where-llms-are-downloaded> #  to avoid redownloading models
 ```
 
-##### [Optional] OPENAI_API_KEY to use OpenAI models or Intel® AI for Enterprise Inference
+##### [Optional] For using OpenAI models or Intel® AI for Enterprise Inference
 
-To use OpenAI models, generate a key following these [instructions](https://platform.openai.com/api-keys).
+Acquire a key using one of the following methods:
+1. To use OpenAI models, generate a key following these [instructions](https://platform.openai.com/api-keys).
 
-To use a remote server running Intel® AI for Enterprise Inference, contact the cloud service provider or owner of the on-prem machine for a key to access the desired model on the server.
+2. To use a remote server running [Intel® AI for Enterprise Inference](https://github.com/opea-project/Enterprise-Inference/tree/main), contact the cloud service provider or owner of the on-prem machine for a key to access the desired model on the server.
 
 Then set the environment variable `OPENAI_API_KEY` with the key contents:
 
