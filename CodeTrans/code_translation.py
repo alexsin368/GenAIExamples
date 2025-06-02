@@ -37,20 +37,8 @@ def align_inputs(self, inputs, cur_node, runtime_graph, llm_parameters_dict, **k
     - inputs: The aligned inputs for the current node.
     """
 
-    # Check if the current service type is EMBEDDING
-    if self.services[cur_node].service_type == ServiceType.EMBEDDING:
-        # Store the input query for later use
-        self.input_query = inputs["query"]
-        # Set the input for the embedding service
-        inputs["input"] = inputs["query"]
-
-    # Check if the current service type is RETRIEVER
-    elif self.services[cur_node].service_type == ServiceType.RETRIEVER:
-        # Extract the embedding from the inputs
-        embedding = inputs["data"][0]["embedding"]
-        # Align the inputs for the retriever service
-        inputs = {"index_name": llm_parameters_dict["index_name"], "text": self.input_query, "embedding": embedding}
-    elif self.services[cur_node].service_type == ServiceType.LLM:
+    # Check if the current service type is LLM
+    if self.services[cur_node].service_type == ServiceType.LLM:
         # convert TGI/vLLM to unified OpenAI /v1/chat/completions format
         next_inputs = {}
         next_inputs["model"] = LLM_MODEL_ID
