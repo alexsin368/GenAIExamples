@@ -12,7 +12,7 @@ services:
       no_proxy: ${no_proxy}
       http_proxy: ${http_proxy}
       https_proxy: ${https_proxy}
-      LLM_ENDPOINT: ${REMOTE_ENDPOINT}
+      LLM_ENDPOINT: ${LLM_ENDPOINT}
       LLM_MODEL_ID: ${LLM_MODEL_ID}
       OPENAI_API_KEY: ${API_KEY}
       LLM_COMPONENT_NAME: ${LLM_COMPONENT_NAME}
