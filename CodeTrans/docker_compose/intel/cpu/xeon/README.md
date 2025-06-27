@@ -159,6 +159,7 @@ export LLM_MODEL_ID=<model-card>
 ```
 
 After setting these environment variables, run `docker compose` with `compose_remote.yaml`:
+
 ```bash
 docker compose -f compose_remote.yaml up -d
 ```
