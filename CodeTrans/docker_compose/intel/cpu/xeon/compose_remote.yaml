@@ -14,7 +14,7 @@ services:
       - MEGA_SERVICE_HOST_IP=${MEGA_SERVICE_HOST_IP}
       - LLM_SERVICE_HOST_IP=${REMOTE_ENDPOINT}
       - LLM_MODEL_ID=${LLM_MODEL_ID}
-      - OPENAI_API_KEY=${API_KEY}
+      - API_KEY=${API_KEY}
     ipc: host
     restart: always
   codetrans-xeon-ui-server:
