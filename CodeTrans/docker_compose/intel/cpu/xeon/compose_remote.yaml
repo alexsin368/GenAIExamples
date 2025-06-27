@@ -5,9 +5,6 @@ services:
   llm:
     image: ${REGISTRY:-opea}/llm-textgen:${TAG:-latest}
     container_name: codetrans-xeon-llm-server
-    depends_on:
-      vllm-service:
-        condition: service_healthy
     ports:
       - "9000:9000"
     ipc: host
