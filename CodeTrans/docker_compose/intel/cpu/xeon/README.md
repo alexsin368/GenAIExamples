@@ -138,25 +138,27 @@ Key parameters are configured via environment variables set before running `dock
 In the context of deploying a CodeTrans pipeline on an Intel® Xeon® platform, we can pick and choose different large language model serving frameworks. The table below outlines the various configurations that are available as part of the application. These configurations can be used as templates and can be extended to different components available in [GenAIComps](https://github.com/opea-project/GenAIComps.git).
 
 <<<<<<< HEAD
-| File                                   | Description                                                                               |
+| File | Description |
 | -------------------------------------- | ----------------------------------------------------------------------------------------- |
-| [compose.yaml](./compose.yaml)         | Default compose file using vllm as serving framework and redis as vector database         |
+| [compose.yaml](./compose.yaml) | Default compose file using vllm as serving framework and redis as vector database |
 | [compose_tgi.yaml](./compose_tgi.yaml) | The LLM serving framework is TGI. All other configurations remain the same as the default |
 =======
-| File                                         | Description                                                                                                                                                                                                                                               |
+| File | Description |
 | -------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [compose.yaml](./compose.yaml)               | Default compose file using vllm as serving framework and redis as vector database                                                                                                                                                                         |
-| [compose_tgi.yaml](./compose_tgi.yaml)       | The LLM serving framework is TGI. All other configurations remain the same as the default                                                                                                                                                                 |
->>>>>>> fd7267a1d5101ad8c0d269d9582dc7d37933b71b
-| [compose_remote.yaml](./compose_remote.yaml) | The LLM used is hosted on a remote server and an endpoint is used to access this model. Additional environment variables need to be set before running. See [instructions](#running-llm-models-deployed-on-remote-servers-with-compose_remoteyaml) below. |
+| [compose.yaml](./compose.yaml) | Default compose file using vllm as serving framework and redis as vector database |
+| [compose_tgi.yaml](./compose_tgi.yaml) | The LLM serving framework is TGI. All other configurations remain the same as the default |
+
+> > > > > > > fd7267a1d5101ad8c0d269d9582dc7d37933b71b
+> > > > > > > | [compose_remote.yaml](./compose_remote.yaml) | The LLM used is hosted on a remote server and an endpoint is used to access this model. Additional environment variables need to be set before running. See [instructions](#running-llm-models-deployed-on-remote-servers-with-compose_remoteyaml) below. |
 
 ### Running LLM models deployed on remote servers with `compose_remote.yaml`
 
 <<<<<<< HEAD
-To run the LLM model on a remote server, the environment variable `LLM_MODEL_ID` may need to be overwritten, and two new environment variables `REMOTE_ENDPOINT` and `OPENAI_API_KEY` need to be set. An example endpoint is https://api.inference.example.com, but the actual value will depend on how it is set up on the remote server. The key is used to access the remote server. 
+To run the LLM model on a remote server, the environment variable `LLM_MODEL_ID` may need to be overwritten, and two new environment variables `REMOTE_ENDPOINT` and `OPENAI_API_KEY` need to be set. An example endpoint is https://api.inference.example.com, but the actual value will depend on how it is set up on the remote server. The key is used to access the remote server.
 =======
 To run the LLM model on a remote server, the environment variable `LLM_MODEL_ID` may need to be overwritten, and two new environment variables `REMOTE_ENDPOINT` and `OPENAI_API_KEY` need to be set. An example endpoint is https://api.inference.example.com, but the actual value will depend on how it is set up on the remote server. The key is used to access the remote server.
->>>>>>> fd7267a1d5101ad8c0d269d9582dc7d37933b71b
+
+> > > > > > > fd7267a1d5101ad8c0d269d9582dc7d37933b71b
 
 ```bash
 export LLM_MODEL_ID=<name-of-llm-model-card>
