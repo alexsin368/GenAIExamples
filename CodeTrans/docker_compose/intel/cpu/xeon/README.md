@@ -137,15 +137,15 @@ Key parameters are configured via environment variables set before running `dock
 
 In the context of deploying a CodeTrans pipeline on an Intel® Xeon® platform, we can pick and choose different large language model serving frameworks. The table below outlines the various configurations that are available as part of the application. These configurations can be used as templates and can be extended to different components available in [GenAIComps](https://github.com/opea-project/GenAIComps.git).
 
-| File                                         | Description                                                                                                                                                                                                                                               |
-| -------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [compose.yaml](./compose.yaml) | Default compose file using vllm as serving framework and redis as vector database |
-| [compose_tgi.yaml](./compose_tgi.yaml) | The LLM serving framework is TGI. All other configurations remain the same as the default |
+| File                                         | Description                                                                                                                                                                                                                  |
+| -------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [compose.yaml](./compose.yaml)               | Default compose file using vllm as serving framework and redis as vector database                                                                                                                                            |
+| [compose_tgi.yaml](./compose_tgi.yaml)       | The LLM serving framework is TGI. All other configurations remain the same as the default                                                                                                                                    |
 | [compose_remote.yaml](./compose_remote.yaml) | The LLM used is hosted on a remote server and an endpoint is used to access this model. Additional environment variables need to be set before running. See [instructions](#running-llm-models-with-remote-endpoints) below. |
 
 ### Running LLM models with remote endpoints
 
-When models are deployed on a remote server, a base URL and an API key are required to access them. To set up a remote server and acquire the base URL and API key, refer to [Intel® AI for Enterprise Inference](https://www.intel.com/content/www/us/en/products/docs/accelerator-engines/enterprise-ai.html) offerings. 
+When models are deployed on a remote server, a base URL and an API key are required to access them. To set up a remote server and acquire the base URL and API key, refer to [Intel® AI for Enterprise Inference](https://www.intel.com/content/www/us/en/products/docs/accelerator-engines/enterprise-ai.html) offerings.
 
 Set the following environment variables. `REMOTE_ENDPOINT` is the HTTPS endpoint of the remote server (i.e. https://api.inference.denvrdata.com). `API_KEY` is the access token or key to access the model(s) on the server. `LLM_MODEL_ID` is the model card which may need to be overwritten depending on what it is set to `set_env.sh`.
 
