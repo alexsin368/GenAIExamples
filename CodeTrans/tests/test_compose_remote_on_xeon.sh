@@ -38,7 +38,7 @@ function start_vllm_litellm_server() {
     export LLM_SERVER_HOST_IP="http://inference-for-ci.com:43127"
     export LLM_SERVER_PORT="43127"
     export LLM_MODEL="opea/ci-test-model"
-    export LITELLM_MASTER_KEY="sk-1234"
+    export OPENAI_API_KEY="sk-1234"
 
     # Start vLLM + LiteLLM docker containers
     docker compose -f docker-compose.yml up -d > ${LOG_PATH}/start_vllm_litellm_server_with_compose.log
@@ -67,7 +67,7 @@ function start_services() {
 
     # Additional env variables for remote endpoint
     export REMOTE_ENDPOINT=${LLM_SERVER_HOST_IP}
-    export API_KEY=${LITELLM_MASTER_KEY}
+    export API_KEY=${OPENAI_API_KEY}
     export LLM_MODEL_ID=${LLM_MODEL}
 
     sed -i "s/backend_address/$ip_address/g" $WORKPATH/ui/svelte/.env
