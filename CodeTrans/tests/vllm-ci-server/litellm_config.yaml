@@ -1,0 +1,6 @@
+model_list:
+  - model_name: "opea/ci-test-model"
+    litellm_params:
+      model: "openai/HuggingFaceTB/SmolLM-135M-Instruct"
+      api_base: "http://vllm:8000/v1"
+      api_key: "dummy"
