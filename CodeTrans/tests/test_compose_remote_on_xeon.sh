@@ -37,7 +37,7 @@ function start_vllm_litellm_server() {
     export HUGGING_FACE_HUB_TOKEN=${HF_TOKEN}
     export LLM_SERVER_HOST_IP="http://inference-for-ci.com:43127"
     export LLM_SERVER_PORT="43127"
-    export LLM_MODEL="opea/ci-test-model"
+    export LLM_MODEL="HuggingFaceTB/SmolLM-135M-Instruct"
     export OPENAI_API_KEY="sk-1234"
 
     # Start vLLM + LiteLLM docker containers
@@ -185,6 +185,10 @@ function stop_vllm_litellm_server() {
 }
 
 function main() {
+
+    echo "::group::stop_vllm_litellm_server"
+    stop_vllm_litellm_server
+    echo "::endgroup::"
 
     echo "::group::stop_docker"
     stop_docker
