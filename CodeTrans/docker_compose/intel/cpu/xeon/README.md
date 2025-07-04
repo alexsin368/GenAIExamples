@@ -139,9 +139,9 @@ In the context of deploying a CodeTrans pipeline on an Intel® Xeon® platform, 
 
 | File                                         | Description                                                                                                                                                                                                                  |
 | -------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [compose.yaml](./compose.yaml)               | Default compose file using vllm as serving framework and redis as vector database                                                                                                                                            |
-| [compose_tgi.yaml](./compose_tgi.yaml)       | The LLM serving framework is TGI. All other configurations remain the same as the default                                                                                                                                    |
-| [compose_remote.yaml](./compose_remote.yaml) | The LLM used is hosted on a remote server and an endpoint is used to access this model. Additional environment variables need to be set before running. See [instructions](#running-llm-models-with-remote-endpoints) below. |
+| [compose.yaml](./compose.yaml)               | Default compose file using vllm as serving framework and redis as vector database.                                                                                                                                            |
+| [compose_tgi.yaml](./compose_tgi.yaml)       | The LLM serving framework is TGI. All other configurations remain the same as the default.                                                                                                                                    |
+| [compose_remote.yaml](./compose_remote.yaml) | The LLM used is hosted on a remote server and an endpoint is used to access this model. vLLM is the serving framework. Additional environment variables need to be set before running. See [instructions](#running-llm-models-with-remote-endpoints) below. |
 
 ### Running LLM models with remote endpoints
 
